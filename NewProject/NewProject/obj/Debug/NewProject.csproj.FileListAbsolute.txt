@@ -1,0 +1,11 @@
+C:\Users\zeyna\source\repos\NewProject\NewProject\bin\Debug\NewProject.exe.config
+C:\Users\zeyna\source\repos\NewProject\NewProject\bin\Debug\NewProject.exe
+C:\Users\zeyna\source\repos\NewProject\NewProject\bin\Debug\NewProject.pdb
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.csprojAssemblyReference.cache
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.Properties.Resources.resources
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.csproj.GenerateResource.cache
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.csproj.CoreCompileInputs.cache
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.exe
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.pdb
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.Login.resources
+C:\Users\zeyna\source\repos\NewProject\NewProject\obj\Debug\NewProject.Form2.resources
