@@ -18,6 +18,23 @@ namespace NewProject
             InitializeComponent();
         }
 
-       
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+           
+        }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+           
+
+            textBox1.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+            textBox2.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            textBox3.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            textBox4.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+
+        }
+        
+
     }
 }

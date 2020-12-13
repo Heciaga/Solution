@@ -16,32 +16,34 @@ namespace NewProject
         public Form2()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void melumatlar_Click(object sender, EventArgs e)
         {
-
             Form3 menu = new Form3() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, Visible = true };
+
+           
+            
             menu.FormBorderStyle = (FormBorderStyle)comboBox1.SelectedIndex;
             this.panel3.Controls.Add(menu);
+            menu.Text = "Mallar";
+
             menu.Show();
             
-            
-            
-            
-            
+
             string connetionString;
             SqlConnection cnn;
             connetionString = "server=DESKTOP-BEP2C2E;database=Logix14db;UID=sa;password=12@_Heci";
             cnn = new SqlConnection(connetionString);
             cnn.Open();
-            SqlDataAdapter sd = new SqlDataAdapter("select idn No,serial kod, name 'Mal adi',price 'maya qiyymeti' from sm_goods", cnn);
+            SqlDataAdapter sd = new SqlDataAdapter("select idn No,serial kod,barcode, name 'Mal adi',price 'maya qiyymeti' from sm_goods", cnn);
             DataSet ds = new DataSet();
             sd.Fill(ds, "sm_goods");
             menu.dataGridView1.Visible = true;
             menu.dataGridView1.DataSource = ds.Tables[0];
-
             cnn.Close();
+
             
         }
 
@@ -59,6 +61,14 @@ namespace NewProject
             */
             
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+            
+
+   
         }
     }
 }
