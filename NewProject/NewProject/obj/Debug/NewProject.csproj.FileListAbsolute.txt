@@ -33,3 +33,4 @@ C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.csproj.Generate
 C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.csproj.CoreCompileInputs.cache
 C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.exe
 C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.pdb
+C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.Melumatlar.resources

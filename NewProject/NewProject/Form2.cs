@@ -21,17 +21,23 @@ namespace NewProject
 
         private void melumatlar_Click(object sender, EventArgs e)
         {
-            Form3 menu = new Form3() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, Visible = true };
 
-           
-            
+
+
+
+
+
+
+            /*Form3 menu = new Form3() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, Visible = true };*/
+
+            Melumatlar menu = new Melumatlar() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, Visible = true };
+
             menu.FormBorderStyle = (FormBorderStyle)comboBox1.SelectedIndex;
             this.panel3.Controls.Add(menu);
             menu.Text = "Mallar";
-
             menu.Show();
             
-
+            /*
             string connetionString;
             SqlConnection cnn;
             connetionString = "server=DESKTOP-BEP2C2E;database=Logix14db;UID=sa;password=12@_Heci";
@@ -43,8 +49,9 @@ namespace NewProject
             menu.dataGridView1.Visible = true;
             menu.dataGridView1.DataSource = ds.Tables[0];
             cnn.Close();
+            */
 
-            
+
         }
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
@@ -65,10 +72,6 @@ namespace NewProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-            
-
-   
         }
     }
 }
