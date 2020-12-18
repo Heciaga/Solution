@@ -88,7 +88,7 @@ namespace NewProject
             this.button1.TabIndex = 1;
             this.button1.Text = "Sənədlər";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+
             // 
             // melumatlar
             // 
@@ -135,6 +135,7 @@ namespace NewProject
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1167, 659);
             this.panel3.TabIndex = 2;
+
             // 
             // Form2
             // 

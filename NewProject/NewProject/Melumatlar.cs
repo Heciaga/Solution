@@ -13,14 +13,14 @@ namespace NewProject
 {
     public partial class Melumatlar : Form
     {
-
         string connetionString = "server=DESKTOP-BEP2C2E;database=Logix14db;UID=sa;password=12@_Heci";
+        
         public Melumatlar()
         {
             InitializeComponent();
         }
-
-        void PopulationComcobox()
+        
+        void PopulationComcobox() // datagriddeki combobox a datalarin getriilmesi
         {
             using (SqlConnection sqlCon = new SqlConnection(connetionString))
             {
@@ -35,7 +35,8 @@ namespace NewProject
                 topItem[1] = "--Select--";
 
                 dtbl.Rows.InsertAt(topItem, 0);
-                cbxkon_name.DataSource = dtbl;  
+                cbxkon_name.DataSource = dtbl;
+                sqlCon.Close();
             }
         }
 
@@ -49,25 +50,14 @@ namespace NewProject
                 sqlda.Fill(dtbl);
                 dataGridView1.DataSource = dtbl;
                 /*---------------Sum deyerin getirilmesi------Sahil style------*/
-
                 SqlCommand Comm1 = new SqlCommand("select sum(sellprice1) from sm_goods", sqlCon);
-
                 SqlDataReader DR1 = Comm1.ExecuteReader();
-                if (DR1.Read())
-                {
-                    textBox1.Text = DR1.GetValue(0).ToString();
-                }
-
+                    if (DR1.Read())
+                    {
+                        textBox1.Text = DR1.GetValue(0).ToString();
+                    }
                 panel2.Visible = true;
-
-                /*---------------Sum deyerin getirilmesi------Haci style------*/
-
-                /*
-                textBox1.Text = "0";
-                for (int i = 0; i < dataGridView1.Rows.Count-1; i++)
-                {
-                    textBox1.Text = Convert.ToString(double.Parse(textBox1.Text) + double.Parse(dataGridView1.Rows[i].Cells[5].Value.ToString()));
-                }*/
+                sqlCon.Close();
             }
         }
 
@@ -77,6 +67,8 @@ namespace NewProject
         {
             PopulationComcobox();
             populateDatagridview();
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -100,50 +92,14 @@ namespace NewProject
                     sqlCmd.Parameters.AddWithValue("@kontra", Convert.ToInt32(dgvRow.Cells["cbxkon_name"].Value == DBNull.Value ? "0" : dgvRow.Cells["cbxkon_name"].Value.ToString()));
                     sqlCmd.Parameters.AddWithValue("@price", Convert.ToDecimal(dgvRow.Cells["txtprice"].Value == DBNull.Value ? "0" : dgvRow.Cells["txtprice"].Value.ToString()));
                     sqlCmd.Parameters.AddWithValue("@sellprice", Convert.ToDecimal(dgvRow.Cells["txtsellprice"].Value == DBNull.Value ? "0" : dgvRow.Cells["txtsellprice"].Value.ToString()));
-                    /*
-                    foreach (DataGridViewRow rw in this.dataGridView1.Rows)
-                    {
-                        for (int i = 0; i < rw.Cells.Count; i++)
-                        {
-                            if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                            {
-                                MessageBox.Show(rw.Cells[i].ColumnIndex + "Xana bos ola bilmez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    //}*/
-
                     sqlCmd.ExecuteNonQuery();
                       populateDatagridview();
+                              sqlCon.Close();
                 }
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Delete")
-            {
-                if (MessageBox.Show("Silmek istediyinizden Eminsiniz??", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    using (SqlConnection sqlCon = new SqlConnection(connetionString))
-                    {
-                        sqlCon.Open();
-                        DataGridViewRow dgvRow = dataGridView1.CurrentRow;
-                        SqlCommand sqlCmd = new SqlCommand("MallarDelete", sqlCon);
-                        sqlCmd.CommandType = CommandType.StoredProcedure;
-                        sqlCmd.Parameters.AddWithValue("@mal_idn", Convert.ToInt32(dgvRow.Cells["txtidn"].Value));
-                        sqlCmd.ExecuteNonQuery();
-                        populateDatagridview();
-                    }
-                }
-
-
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+   
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -208,6 +164,57 @@ namespace NewProject
         private void button4_Click(object sender, EventArgs e)
         {
             dataGridView1.ReadOnly = false;
+        }
+       
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            using (SqlConnection sqlCon = new SqlConnection(connetionString))
+            { 
+                        if (e.RowIndex >= 0)
+                            {
+                                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                                name.Text = row.Cells["txtName"].Value.ToString();
+                                serial.Text = row.Cells["txtkod"].Value.ToString();
+                                button_idn.Text = row.Cells["cbxkon_name"].Value.ToString();
+                                price.Text = row.Cells["txtprice"].Value.ToString();
+                                sellprice.Text = row.Cells["txtsellprice"].Value.ToString();
+                                sqlCon.Open();
+                                if (button_idn.Text != "")
+                                {
+                                    button_idn_TextChanged(sender,e);
+                                }
+                            }
+                sqlCon.Close();
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ButtonClick menu = new ButtonClick();
+                        menu.ShowDialog();
+            button_idn.Text = menu.textBox1.Text;
+        }
+
+        private void button_idn_TextChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connetionString))
+            {
+                    sqlCon.Open();
+                    if (button_idn.Text != "")
+                    {
+                        SqlCommand Comm1 = new SqlCommand("select name from sm_kontra where idn= @idn", sqlCon);
+                        Comm1.Parameters.AddWithValue("@idn", int.Parse(button_idn.Text));
+                        SqlDataReader DR1 = Comm1.ExecuteReader();
+                        if (DR1.Read())
+                        {
+                            txtkontra.Text = DR1.GetValue(0).ToString();
+                        }
+                    }
+                
+                sqlCon.Close();
+            }
         }
     }
 }

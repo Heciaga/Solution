@@ -34,3 +34,4 @@ C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.csproj.CoreComp
 C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.exe
 C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.pdb
 C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.Melumatlar.resources
+C:\Workspace\Solution\NewProject\NewProject\obj\Debug\NewProject.ButtonClick.resources
